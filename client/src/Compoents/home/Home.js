@@ -13,7 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
-import { getPosts } from "../../actions/Post";
+import { getPosts, getPostBySearch } from "../../actions/Post";
 import Paginate from "../Pagination";
 import useStyles from "./styles";
 function useQuery() {
@@ -22,8 +22,8 @@ function useQuery() {
 const Home = () => {
   const classes = useStyles();
   const [currentId, setCurrentId] = useState(null);
-  const [search, setSearch] = useState('');
-  const [tgas, setTags] = useState([]);
+  const [search, setSearch] = useState("");
+  const [tags, setTags] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
   const query = useQuery();
@@ -33,22 +33,26 @@ const Home = () => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
 
-  const handleSearch = () =>{
-    if(search.trim()){
-     console.log("SearchIt")
-    }else{
-      history.push('/');
+  const handleSearch = () => {
+    if (search.trim() || tags) {
+      dispatch(getPostBySearch({ search, tags: tags.join(",") }));
+      history.push(
+        `/posts/search?searchQuery=${search || "none"}&tags=${tags.join(",")}`
+      );
+    } else {
+      history.push("/");
     }
-  }
-  const handleKeyPress = (e) =>{
-    if(e.keycode === 13){
-     handleSearch();
+  };
+  const handleKeyPress = (e) => {
+    if (e.keycode === 13) {
+      handleSearch();
     }
-  } 
+  };
 
-  const handleAdd = (tag) => setTags([...tgas , tag])
-  const handleDelete = (tagTodele)  => setTags(tgas.filter((tags) => tags !== tagTodele))
-  
+  const handleAdd = (tag) => setTags([...tags, tag]);
+  const handleDelete = (tagTodele) =>
+    setTags(tags.filter((tags) => tags !== tagTodele));
+
   return (
     <div>
       <Grow in>
@@ -74,15 +78,15 @@ const Home = () => {
                   variant="outlined"
                   label="Search Memories"
                   value={search}
-                  onKeyDown={handleKeyPress} 
-                  onChange={(e)=>setSearch(e.target.value)}
+                  onKeyDown={handleKeyPress}
+                  onChange={(e) => setSearch(e.target.value)}
                   fullWidth
                 />
                 <ChipInput
                   style={{ margin: "10px 0" }}
                   label="Search Tags"
                   variant="outlined"
-                  value={tgas}
+                  value={tags}
                   onAdd={handleAdd}
                   onDelete={handleDelete}
                 />

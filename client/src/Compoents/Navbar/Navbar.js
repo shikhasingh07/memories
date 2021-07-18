@@ -6,6 +6,7 @@ import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import decode from "jwt-decode";
+import memoriesText from "../../image/memoriesText.png";
 const Navbar = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -30,23 +31,16 @@ const Navbar = () => {
   return (
     <div>
       <AppBar className={classes.appBar} position="static" color="inherit">
-        <div className={classes.brandContainer}>
-          <Typography
-            component={Link}
-            to="/"
-            className={classes.heading}
-            variant="h2"
-            align="center"
-          >
-            Memories
-          </Typography>
+        <Link to="/" className={classes.brandContainer}>
+          <img src={memoriesText} alt="icone" height="45" />
           <img
             className={classes.image}
             src={memories}
             alt="icon"
             height="60"
+            width="60"
           />
-        </div>
+        </Link>
         <Toolbar className={classes.toolbar}>
           {user?.result ? (
             <div className={classes.profile}>
