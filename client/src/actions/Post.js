@@ -1,4 +1,4 @@
-import {FETCH_ALL , CREATE, UPDATE , LIKE , DELETE} from '../contants/actionTypes'
+import {FETCH_ALL , CREATE, UPDATE , LIKE , DELETE } from '../contants/actionTypes'
 import * as api from '../api/index.js';
 
 export const getPosts = () => async (dispatch) => {
@@ -47,10 +47,10 @@ export const likePost =(id) => async (dispatch) =>{
 // ****************************************************************
 export const getPostBySearch = (searchQuery) => async(dispatch)=> {
 try {
-  const {data} = await api.get
-
+  const {data} = await api.fetchPostsBySearch(searchQuery);
+  console.log(data)
 }catch(error){
-
+ console.log(error)
 }
 
 }
