@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import ChipInput from "material-ui-chip-input";
 import {
@@ -13,7 +13,7 @@ import {
 import { useDispatch } from "react-redux";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
-import { getPosts, getPostBySearch } from "../../actions/Post";
+import { getPostBySearch } from "../../actions/Post";
 import Paginate from "../Pagination";
 import useStyles from "./styles";
 function useQuery() {
@@ -21,7 +21,7 @@ function useQuery() {
 }
 const Home = () => {
   const classes = useStyles();
-  const [currentId, setCurrentId] = useState(null);
+  const [currentId, setCurrentId] = useState(0);
   const [search, setSearch] = useState("");
   const [tags, setTags] = useState([]);
   const dispatch = useDispatch();
@@ -46,9 +46,10 @@ const Home = () => {
     }
   };
 
-  const handleAdd = (tag) => setTags([...tags, tag]);
-  const handleDelete = (tagTodele) =>
-    setTags(tags.filter((tags) => tags !== tagTodele));
+  const handleAddChip = (tag) => setTags([...tags, tag]);
+
+  const handleDeleteChip = (chipToDelete) =>
+    setTags(tags.filter((tag) => tag !== chipToDelete));
 
   return (
     <div>
@@ -84,8 +85,8 @@ const Home = () => {
                   label="Search Tags"
                   variant="outlined"
                   value={tags}
-                  onAdd={handleAdd}
-                  onDelete={handleDelete}
+                  onAdd={(chip) => handleAddChip(chip)}
+                  onDelete={(chip) => handleDeleteChip(chip)}
                 />
                 <Button
                   className={classes.searchButton}
