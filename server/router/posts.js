@@ -5,7 +5,7 @@ import {
   updatePost,
   deletePost,
   likePost,
-  getPostsBySearch,
+  getPostBySearch,
 } from "../controllers/posts.js";
 import auth from "../middleware/auth.js";
 //applying middle ware to know that person is allowed or not
@@ -16,5 +16,5 @@ router.patch("/:id", auth, updatePost);
 router.delete("/:id", auth, deletePost);
 router.patch("/:id/likePost", auth, likePost);
 
-router.get("/search", getPostsBySearch);
+router.get("/search", getPostBySearch);
 export default router;
