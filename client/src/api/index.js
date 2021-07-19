@@ -28,3 +28,4 @@ export const fetchPostsBySearch = (searchQuery) =>
       searchQuery.tags
     }`
   );
+export const fetchPost = (id) => API.get(`/posts/${id}`);

@@ -7,6 +7,7 @@ import {
   DELETE,
   START_LOADING,
   END_LOADING,
+  FETCH_POST,
 } from "../contants/actionTypes";
 const posts = (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
@@ -40,6 +41,8 @@ const posts = (state = { isLoading: true, posts: [] }, action) => {
       };
     case FETCH_BY_SEARCH:
       return { ...state, posts: action.payload.data };
+    case FETCH_POST:
+      return { ...state, post: action.payload.post };
     case START_LOADING:
       return { ...state, isLoading: true };
     case END_LOADING:

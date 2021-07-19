@@ -20,9 +20,6 @@ export default makeStyles({
     borderRadius: "15px",
     height: "100%",
     position: "relative",
-    backgroundColor: " #efecec",
-    backgroundImage:
-      "linear-gradient(144deg rgb(245 0 87 / 0%) 38%, #d1bab7 144%)",
   },
   overlay: {
     position: "absolute",
@@ -51,5 +48,9 @@ export default makeStyles({
     padding: "0 16px 8px 16px",
     display: "flex",
     justifyContent: "space-between",
+  },
+  cardAction: {
+    display: "block",
+    textAlign: "initial",
   },
 });
