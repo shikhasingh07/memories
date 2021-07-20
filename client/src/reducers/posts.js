@@ -8,6 +8,7 @@ import {
   START_LOADING,
   END_LOADING,
   FETCH_POST,
+  COMMENT,
 } from "../contants/actionTypes";
 const posts = (state = { isLoading: true, posts: [] }, action) => {
   switch (action.type) {
@@ -47,6 +48,16 @@ const posts = (state = { isLoading: true, posts: [] }, action) => {
       return { ...state, isLoading: true };
     case END_LOADING:
       return { ...state, isLoading: false };
+    case COMMENT:
+      return {
+        ...state,
+        posts: state.posts.map((post) => {
+          if (post._id === action.payload._id) {
+            return action.payload;
+          }
+          return post;
+        }),
+      };
     default:
       return state;
   }

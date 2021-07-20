@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getPost, getPostBySearch } from "../../actions/Post";
 import moment from "moment";
 import useStyles from "./styles";
+import CommandSection from "./CommentSection";
 const PostDetalis = () => {
   const { post, posts, isLoading } = useSelector((state) => state.posts);
   const classes = useStyles();
@@ -67,9 +68,7 @@ const PostDetalis = () => {
             <strong>Realtime Chat - coming soon!</strong>
           </Typography>
           <Divider style={{ margin: "20px 0" }} />
-          <Typography variant="body1">
-            <strong>Comments - coming soon!</strong>
-          </Typography>
+          <CommandSection post={post} />
           <Divider style={{ margin: "20px 0" }} />
         </div>
         <div className={classes.imageSection}>
